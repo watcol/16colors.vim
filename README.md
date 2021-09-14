@@ -11,3 +11,26 @@ A configurable Vim/Neovim color scheme for 16-color terminal.
 - [x] [prabirshrestha/vim-lsp](https://github.com/prabirshrestha/vim-lsp)
 - [x] Neovim LSP
 - [x] Neovim Tree-sitter
+
+# Installation
+
+## With [vim-plug](https://github.com/junegunn/vim-plug)
+```vim
+Plug 'watcol/16colors.vim'
+```
+
+## With [dein.vim](https://github.com/Shougo/dein.vim)
+```vim
+call dein#add('watcol/16colors.vim')
+```
+
+## With [minpac](https://github.com/k-takata/minpac)
+```vim
+call minpac#add('watcol/16colors.vim')
+```
+
+# Usage
+Put this instruction into your vimrc to enable the colorscheme:
+```vim
+colorscheme 16colors
+```
