@@ -148,13 +148,16 @@ call s:h('gitcommitDiscardedFile', s:red,     '', '')
 call s:h('gitcommitSelectedFile',  s:green,   '', '')
 call s:h('gitcommitUnmergedFile',  s:yellow,  '', '')
 
-" signify, gitgutter
+" signify, gitgutter, gitsigns
 call s:h('SignifySignAdd',    s:green,         '', '')
 call s:h('SignifySignChange', s:bright_yellow, '', 'none')
 call s:h('SignifySignDelete', s:red,           '', '')
 hi link GitGutterAdd    SignifySignAdd
 hi link GitGutterChange SignifySignChange
 hi link GitGutterDelete SignifySignDelete
+hi link GitSignsAdd    SignifySignAdd
+hi link GitSignsChange SignifySignChange
+hi link GitSignsDelete SignifySignDelete
 
 " ALE
 call s:h('ALEError',   s:red,           '', 'underline')
