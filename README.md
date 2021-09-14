@@ -1,5 +1,5 @@
 # [WIP] 16colors.vim
-A configurable Vim/Neovim color scheme for 16-color terminal.
+A configurable Vim/Neovim color scheme for 16-color terminals.
 
 # Supported Plugins
 - [ ] [itchyny/lightline.vim](https://github.com/itchyny/lightline.vim)
