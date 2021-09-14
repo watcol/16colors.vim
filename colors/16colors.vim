@@ -2,29 +2,36 @@
 " Author: watcol
 " License: MIT
 
+if has('gui_running') || &termguicolors
+  echoerr '16colors does not support GUI'
+endif
+
 " Setup
 hi clear
 syntax reset
 let g:colors_name = '16colors'
 
+" Load Configurations
+let s:light = get(g:, '16colors_background', &backgorund) is# 'light'
+
 " Colors
-let s:reset = ['none', 'none']
-let s:black = ['0', '#000000']
-let s:red = ['1', '#cd0000']
-let s:green = ['2', '#00cd00']
-let s:yellow = ['3', '#cdcd00']
-let s:blue = ['4', '#0000ee']
-let s:purple = ['5', '#cd00cd']
-let s:cyan = ['6', '#00cdcd']
-let s:white = ['7', '#e5e5e5']
-let s:bright_black = ['8', '#7f7f7f']
-let s:bright_red = ['9', '#ff0000']
-let s:bright_green = ['10', '#00ff00']
-let s:bright_yellow = ['11', '#ffff00']
-let s:bright_blue = ['12', '#5c5cff']
-let s:bright_purple = ['13', '#ff00ff']
-let s:bright_cyan = ['14', '#00ffff']
-let s:bright_white = ['15', '#ffffff']
+let s:reset = 'none'
+let s:black = '0'
+let s:red = '1'
+let s:green = '2'
+let s:yellow = '3'
+let s:blue = '4'
+let s:purple = '5'
+let s:cyan = '6'
+let s:white = '7'
+let s:bright_black = '8'
+let s:bright_red = '9'
+let s:bright_green = '10'
+let s:bright_yellow = '11'
+let s:bright_blue = '12'
+let s:bright_purple = '13'
+let s:bright_cyan = '14'
+let s:bright_white = '15'
 
 if &background == "light"
   let s:fg = s:black
@@ -40,13 +47,13 @@ endif
 function! s:h(group, fg, bg, attr)
   let l:cmd = "hi " . a:group
   if !empty(a:fg)
-    let l:cmd = l:cmd . ' ctermfg=' . a:fg[0] . ' guifg=' . a:fg[1]
+    let l:cmd = l:cmd . ' ctermfg=' . a:fg
   endif
   if !empty(a:bg)
-    let l:cmd = l:cmd . ' ctermbg=' . a:bg[0] . ' guibg=' . a:bg[1]
+    let l:cmd = l:cmd . ' ctermbg=' . a:bg
   endif
   if !empty(a:attr)
-    let l:cmd = l:cmd . ' cterm=' . a:attr . ' gui=' . a:attr
+    let l:cmd = l:cmd . ' cterm=' . a:attr
   endif
   if !empty(a:fg) || !empty(a:bg) || !empty(a:attr)
     execute l:cmd
