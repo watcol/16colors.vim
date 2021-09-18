@@ -12,8 +12,8 @@ let s:light = &background is# 'light'
 let s:default_config = {
 \ 'italic': 1,
 \ 'colors': {
-\   'fg': {'cterm': '', 'gui': s:light ? '#000000' : '#ffffff'},
-\   'bg': {'cterm': '', 'gui': s:light ? '#ffffff' : '#000000'},
+\   'fg': {'cterm': 'none', 'gui': s:light ? '#000000' : '#ffffff'},
+\   'bg': {'cterm': 'none', 'gui': s:light ? '#ffffff' : '#000000'},
 \   'fg_gray': {'cterm': s:light ? '7' : '8', 'gui': s:light ? '#555555' : '#aaaaaa'},
 \   'bg_gray': {'cterm': s:light ? '15' : '0', 'gui': s:light ? '#aaaaaa' : '#555555'},
 \   'cursor_gray': {'cterm': s:light ? '15' : '0', 'gui': s:light ? '#dddddd' : '#222222'},
@@ -24,51 +24,59 @@ let s:default_config = {
 \   'purple': {'cterm': '5', 'gui': '#aa00aa'},
 \   'cyan': {'cterm': '6', 'gui': '#00aaaa'},
 \   'yellow': {'cterm': '11', 'gui': '#ffff55'},
+\ },
+\ 'categories': {
+\   'NormalFg': 'fg',
+\   'NormalBg': 'bg',
+\   'Cursor': 'cursor_gray',
+\   'Background': 'bg_gray',
+\   'Selected': 'fg_gray',
+\   'Quiet': 'fg_gray',
+\   'VeryQuiet': 'bg_gray',
+\   'Emphasis': 'red',
+\   'Search': 'brown',
+\   'Error': 'red',
+\   'Warning': 'yellow',
+\   'Information': 'cyan',
+\   'Hint': 'green',
+\   'Add': 'green',
+\   'Change': 'yellow',
+\   'Delete': 'red',
+\   'String': 'green',
+\   'Escape': 'blue',
+\   'Literal': 'brown',
+\   'Constant': 'green',
+\   'Variable': 'fg',
+\   'Function': 'blue',
+\   'Keyword': 'red',
+\   'Statement': 'purple',
+\   'Operator': 'blue',
+\   'Macro': 'purple',
+\   'Type': 'yellow',
+\   'Variant': 'green',
+\   'Directory': 'cyan',
+\   'Header': 'brown',
+\   'Marker': 'purple',
 \ }
 \}
 
 " TODO: Load g:palette
-
-" Colors
-let s:reset = 'none'
-let s:black = '0'
-let s:red = '1'
-let s:green = '2'
-let s:yellow = '3'
-let s:blue = '4'
-let s:purple = '5'
-let s:cyan = '6'
-let s:white = '7'
-let s:bright_black = '8'
-let s:bright_red = '9'
-let s:bright_green = '10'
-let s:bright_yellow = '11'
-let s:bright_blue = '12'
-let s:bright_purple = '13'
-let s:bright_cyan = '14'
-let s:bright_white = '15'
-
-if &background == "light"
-  let s:fg = s:black
-  let s:fg_grey = s:white
-  let s:bg_grey = s:bright_white
-else
-  let s:fg = s:white
-  let s:fg_grey = s:bright_black
-  let s:bg_grey = s:black
-endif
+let s:config = s:default_config
+let s:italic = s:config.italic ? 'italic' : ''
 
 " Utility function
 function! s:h(group, fg, bg, attr)
   let l:cmd = "hi " . a:group
   if !empty(a:fg)
-    let l:cmd = l:cmd . ' ctermfg=' . a:fg
+    let l:fg = s:config.colors[s:config.categories[a:fg]]
+    let l:cmd = l:cmd . ' ctermfg=' . l:fg.cterm . ' guifg=' . l:fg.gui
   endif
   if !empty(a:bg)
-    let l:cmd = l:cmd . ' ctermbg=' . a:bg
+    let l:bg = s:config.colors[s:config.categories[a:bg]]
+    let l:cmd = l:cmd . ' ctermbg=' . l:bg.cterm . ' guibg=' . l:bg.gui
   endif
   if !empty(a:attr)
-    let l:cmd = l:cmd . ' cterm=' . a:attr
+    let l:cmd = l:cmd . ' cterm=' . a:attr . ' gui=' . a:attr
   endif
   if !empty(a:fg) || !empty(a:bg) || !empty(a:attr)
     execute l:cmd
@@ -76,104 +84,102 @@ function! s:h(group, fg, bg, attr)
 endfunction
 
 " Editor colors
-call s:h('Normal',       '',        '',             '')
-call s:h('ColorColumn',  '',        s:bg_grey,      '')
-call s:h('Conceal',      s:fg_grey, '',             '')
-call s:h('Cursor',       '',        s:fg_grey,      '')
-call s:h('CursorIM',     '',        s:fg_grey,      '')
-call s:h('CursorColumn', '',        s:bg_grey,      '')
-call s:h('CursorLine',   '',        s:bg_grey,      'none')
-call s:h('LineNr',       s:fg_grey, '',             '')
-call s:h('CursorLineNr', s:reset,   s:bg_grey,      '')
-call s:h('VertSplit',    s:bg_grey, s:bg_grey,      '')
-call s:h('Folded',       s:fg_grey, s:reset,        'none')
-call s:h('FoldColumn',   s:fg_grey, s:bg_grey,      '')
-call s:h('Search',       s:yellow,  s:bg_grey,      'none')
-call s:h('IncSearch',    s:yellow,  s:bg_grey,      'none')
-call s:h('MatchParen',   s:red,     s:reset,        'underline')
-call s:h('ModeMsg',      '',        '',             '')
-call s:h('ErrorMsg',     s:red,     s:reset,        'none')
-call s:h('WarningMsg',   s:yellow,  s:reset,        'none')
-call s:h('Question',     s:blue,    '',             '')
-call s:h('Title',        s:red,     '',             '')
-call s:h('MoreMsg',      s:blue,    '',             '')
-call s:h('NonText',      s:bg_grey, '',             '')
-call s:h('SpecialKey',   s:bg_grey, '',             'none')
-call s:h('Whitespace',   s:bg_grey, '',             'none')
-call s:h('Visual',       '',        s:bg_grey,      'none')
-call s:h('VisualNOS',    '',        s:bg_grey,      'none')
-call s:h('WildMenu',     '',        s:bg_grey,      'none')
-call s:h('SignColumn',   '',        s:reset,        'none')
-call s:h('Directory',    s:cyan,    '',             'none')
+call s:h('Normal',       'NormalFg',    'NormalBg',    '')
+call s:h('ColorColumn',  '',            'Background',  '')
+call s:h('Conceal',      'Quiet',       '',            '')
+call s:h('Cursor',       '',            'Background',  '')
+call s:h('CursorIM',     '',            'Background',  '')
+call s:h('CursorColumn', '',            'Cursor',      '')
+call s:h('CursorLine',   '',            'Cursor',      'none')
+call s:h('LineNr',       'Quiet',       'NormalBg',    '')
+call s:h('CursorLineNr', 'NormalFg',    'Cursor',      '')
+call s:h('VertSplit',    'Cursor',      'Cursor',      '')
+call s:h('Folded',       'Quiet',       'NormalBg',    s:italic)
+call s:h('FoldColumn',   'Quiet',       'Background',  '')
+call s:h('Search',       'Search',      'Background',  'none')
+call s:h('IncSearch',    'Search',      'Background',  'none')
+call s:h('MatchParen',   'Emphasis',    'NormalBg',    'underline')
+call s:h('ModeMsg',      '',            '',             '')
+call s:h('ErrorMsg',     'Error',       'NormalBg',     'none')
+call s:h('WarningMsg',   'Warning',     'NormalBg',     'none')
+call s:h('Question',     'Information', '',             '')
+call s:h('Title',        'Header',      '',             '')
+call s:h('MoreMsg',      'Information', '',             '')
+call s:h('NonText',      'VeryQuiet',   '',             '')
+call s:h('SpecialKey',   'VeryQuiet',   '',             'none')
+call s:h('Whitespace',   'VeryQuiet',   '',             'none')
+call s:h('Visual',       '',            'Background',   'none')
+call s:h('VisualNOS',    '',            'Background',   'none')
+call s:h('WildMenu',     '',            'Background',   'none')
+call s:h('SignColumn',   '',            'NormalBg',     'none')
+call s:h('Directory',    'Directory',   '',             'none')
 
 " Popup Menu
-call s:h('Pmenu',      s:reset, s:bg_grey, 'none')
-call s:h('PmenuSel',   s:reset, s:fg_grey, 'none')
-call s:h('PmenuSbar',  '',      s:bg_grey, 'none')
-call s:h('PmenuThumb', '',      s:reset,   'reverse')
+call s:h('Pmenu',      'NormalFg', 'Background', 'none')
+call s:h('PmenuSel',   'NormalFg', 'Selected',   'none')
+call s:h('PmenuSbar',  '',         'Background', 'none')
+call s:h('PmenuThumb', '',         'NormalBg',   'reverse')
 
 " Status Line
-call s:h('StatusLine',   s:reset,   '',        'none')
-call s:h('StatusLineNC', s:fg_grey, '',        'none')
-call s:h('TabLine',      s:fg_grey, '',        'none')
-call s:h('TabLineSel',   s:reset,   s:bg_grey, 'none')
-call s:h('TabLineFill',  s:reset,   '',        'none')
+call s:h('StatusLine',   'NormalFg', '',           'none')
+call s:h('StatusLineNC', 'Quiet',    '',           'none')
+call s:h('TabLine',      'Quiet',    '',           'none')
+call s:h('TabLineSel',   'Quiet',    'Background', 'none')
+call s:h('TabLineFill',  'NormalFg', '',           'none')
 
 " Standard Syntax
-call s:h('Comment',    s:fg_grey,       '',     'italic')
-call s:h('Constant',   s:green,         '',      '')
-call s:h('String',     s:green,         '',      '')
-call s:h('Character',  s:green,         '',      '')
-call s:h('Number',     s:yellow,        '',      '')
-call s:h('Boolean',    s:yellow,        '',      '')
-call s:h('Float',      s:yellow,        '',      '')
-call s:h('Identifier', s:bright_yellow, '',      'none')
-call s:h('Function',   s:blue,          '',      '')
-call s:h('Statement',  s:purple,        '',      '')
-call s:h('Operator',   s:blue,          '',      '')
-call s:h('Keyword',    s:red,           '',      '')
-call s:h('Preproc',    s:purple,        '',      '')
-call s:h('Include',    s:blue,          '',      '')
-call s:h('PreCondit',  s:yellow,        '',      '')
-call s:h('Type',       s:bright_yellow, '',      'none')
-call s:h('Special',    '',              '',      '')
-call s:h('Delimiter',  s:reset,         '',      '')
-call s:h('Underlined', s:blue,          '',      'underline')
-call s:h('Ignore',     '',              '',      '')
-call s:h('Error',      s:red,           s:reset, 'bold')
-call s:h('Todo',       s:purple,        s:reset, '')
+call s:h('Comment',    'Quiet',     '',     s:italic)
+call s:h('Constant',   'Constant',  '',      '')
+call s:h('String',     'String',    '',      '')
+call s:h('Character',  'String',    '',      '')
+call s:h('Number',     'Literal',   '',      '')
+call s:h('Boolean',    'Literal',   '',      '')
+call s:h('Float',      'Literal',   '',      '')
+call s:h('Identifier', 'Variable',  '',      'none')
+call s:h('Function',   'Function',  '',      '')
+call s:h('Statement',  'Statement', '',      '')
+call s:h('Operator',   'Operator',  '',      '')
+call s:h('Keyword',    'Keyword',   '',      '')
+call s:h('Preproc',    'Macro',     '',      '')
+call s:h('Type',       'Type',      '',      'none')
+call s:h('Special',    '',          '',      '')
+call s:h('Delimiter',  'NormalFg',  '',      '')
+call s:h('Underlined', 'Emphasis',  '',      'underline')
+call s:h('Ignore',     '',          '',      '')
+call s:h('Error',      'Error',     'NormalBg', 'bold')
+call s:h('Todo',       'Marker',    'NormalBg', '')
 
 " Spell Check
-call s:h('SpellBad',   s:red,    s:reset, 'underline')
-call s:h('SpellLocal', s:yellow, s:reset, 'underline')
-call s:h('SpellCap',   s:yellow, s:reset, 'underline')
-call s:h('SpellRare',  s:yellow, s:reset, 'underline')
+call s:h('SpellBad',   'Error',   'NormalBg', 'underline')
+call s:h('SpellLocal', 'Warning', 'NormalBg', 'underline')
+call s:h('SpellCap',   'Warning', 'NormalBg', 'underline')
+call s:h('SpellRare',  'Warning', 'NormalBg', 'underline')
 
 " Diff highlight
-call s:h('DiffAdd',     s:green,         s:reset, '')
-call s:h('DiffChange',  s:bright_yellow, s:reset, 'none')
-call s:h('DiffDelete',  s:red,           s:reset, '')
-call s:h('DiffText',    s:blue,          '',      '')
-call s:h('DiffAdded',   s:green,         '',      '')
-call s:h('DiffFile',    s:red,           '',      '')
-call s:h('DiffNewFile', s:green,         '',      '')
-call s:h('DiffLine',    s:blue,          '',      '')
-call s:h('DiffRemoved', s:red,           '',      '')
+call s:h('DiffAdd',     'Add',          'NormalBg', '')
+call s:h('DiffChange',  'Change',       'NormalBg', 'none')
+call s:h('DiffDelete',  'Delete',       'NormalBg', '')
+call s:h('DiffText',    'Information',  '',      '')
+call s:h('DiffAdded',   'Add',          '',      '')
+call s:h('DiffFile',    'Emphasis',     '',      '')
+call s:h('DiffNewFile', 'Add',          '',      '')
+call s:h('DiffLine',    'Information',  '',      '')
+call s:h('DiffRemoved', 'Delete',       '',      '')
 
 " Gitcommit highlights
-call s:h('gitcommitBranch',        s:purple,  '', '')
-call s:h('gitcommitHeader',        s:yellow,  '', '')
-call s:h('gitcommitSummary',       s:reset,   '', '')
-call s:h('gitcommitOverflow',      s:red,     '', '')
-call s:h('gitcommitUntrackedFile', s:cyan,    '', '')
-call s:h('gitcommitDiscardedFile', s:red,     '', '')
-call s:h('gitcommitSelectedFile',  s:green,   '', '')
-call s:h('gitcommitUnmergedFile',  s:yellow,  '', '')
+call s:h('gitcommitBranch',        'Marker',      '', '')
+call s:h('gitcommitHeader',        'Header',      '', '')
+call s:h('gitcommitSummary',       'NormalFg',    '', '')
+call s:h('gitcommitOverflow',      'Emphasis',    '', '')
+call s:h('gitcommitUntrackedFile', 'Warning',     '', '')
+call s:h('gitcommitDiscardedFile', 'Emphasis',    '', '')
+call s:h('gitcommitSelectedFile',  'Information', '', '')
+call s:h('gitcommitUnmergedFile',  'Warning',      '', '')
 
 " signify, gitgutter, gitsigns
-call s:h('SignifySignAdd',    s:green,         '', '')
-call s:h('SignifySignChange', s:bright_yellow, '', 'none')
-call s:h('SignifySignDelete', s:red,           '', '')
+call s:h('SignifySignAdd',    'Add',    '', '')
+call s:h('SignifySignChange', 'Change', '', '')
+call s:h('SignifySignDelete', 'Delete', '', '')
 hi link GitGutterAdd    SignifySignAdd
 hi link GitGutterChange SignifySignChange
 hi link GitGutterDelete SignifySignDelete
@@ -182,83 +188,83 @@ hi link GitSignsChange SignifySignChange
 hi link GitSignsDelete SignifySignDelete
 
 " ALE
-call s:h('ALEError',   s:red,           '', 'underline')
-call s:h('ALEWarning', s:bright_yellow, '', 'underline')
-call s:h('ALEInfo',    s:green,         '', 'underline')
+call s:h('ALEError',   'Error',       '', 'underline')
+call s:h('ALEWarning', 'Warning',     '', 'underline')
+call s:h('ALEInfo',    'Information', '', 'underline')
 
 " vim-lsp
-call s:h('LspError',                  s:red,           '',        '')
-call s:h('LspErrorText',              s:red,           '',        '')
-call s:h('LspErrorHighlight',         s:red,           '',        'underline')
-call s:h('LspErrorVirtualText',       s:red,           s:bg_grey, '')
-call s:h('LspWarning',                s:bright_yellow, '',        'none')
-call s:h('LspWarningText',            s:bright_yellow, '',        'none')
-call s:h('LspWarningHighlight',       s:bright_yellow, '',        'underline')
-call s:h('LspWarningVirtualText',     s:bright_yellow, s:bg_grey, 'none')
-call s:h('LspInformation',            s:cyan,          '',        '')
-call s:h('LspInformationText',        s:cyan,          '',        '')
-call s:h('LspInformationHighlight',   s:cyan,          '',        'underline')
-call s:h('LspInformationVirtualText', s:cyan,          s:bg_grey, '')
-call s:h('LspHint',                   s:green,         '',        '')
-call s:h('LspHintText',               s:green,         '',        '')
-call s:h('LspHintHighlight',          s:green,         '',        'underline')
-call s:h('LspHintVirtualText',        s:green,         s:bg_grey, '')
-call s:h('LspCodeActionText',         s:purple,        '',        '')
+call s:h('LspError',                  'Error',       '',           '')
+call s:h('LspErrorText',              'Error',       '',           '')
+call s:h('LspErrorHighlight',         'Error',       '',           'underline')
+call s:h('LspErrorVirtualText',       'Error',       'Background', '')
+call s:h('LspWarning',                'Warning',     '',           'none')
+call s:h('LspWarningText',            'Warning',     '',           'none')
+call s:h('LspWarningHighlight',       'Warning',     '',           'underline')
+call s:h('LspWarningVirtualText',     'Warning',     'Background', '')
+call s:h('LspInformation',            'Information', '',           '')
+call s:h('LspInformationText',        'Information', '',           '')
+call s:h('LspInformationHighlight',   'Information', '',           'underline')
+call s:h('LspInformationVirtualText', 'Information', 'Background', '')
+call s:h('LspHint',                   'Hint',        '',           '')
+call s:h('LspHintText',               'Hint',        '',           '')
+call s:h('LspHintHighlight',          'Hint',        '',           'underline')
+call s:h('LspHintVirtualText',        'Hint',        'Background', '')
+call s:h('LspCodeActionText',         'Marker',      '',           '')
 
 " Neovim built-in LSP
-call s:h('LspDiagnosticsDefaultError',          s:red,           '', '')
-call s:h('LspDiagnosticsDefaultWarning',        s:bright_yellow, '', 'none')
-call s:h('LspDiagnosticsDefaultInformation',    s:cyan,          '', '')
-call s:h('LspDiagnosticsDefaultHint',           s:green,         '', '')
-call s:h('LspDiagnosticsUnderlinedError',       s:red,           '', 'underline')
-call s:h('LspDiagnosticsUnderlinedWarning',     s:bright_yellow, '', 'underline')
-call s:h('LspDiagnosticsUnderlinedInformation', s:cyan,          '', 'underline')
-call s:h('LspDiagnosticsUnderlinedHint',        s:green,         '', 'underline')
+call s:h('LspDiagnosticsDefaultError',          'Error',       '', '')
+call s:h('LspDiagnosticsDefaultWarning',        'Warning',     '', '')
+call s:h('LspDiagnosticsDefaultInformation',    'Information', '', '')
+call s:h('LspDiagnosticsDefaultHint',           'Hint',        '', '')
+call s:h('LspDiagnosticsUnderlinedError',       'Error',       '', 'underline')
+call s:h('LspDiagnosticsUnderlinedWarning',     'Warning',     '', 'underline')
+call s:h('LspDiagnosticsUnderlinedInformation', 'Information', '', 'underline')
+call s:h('LspDiagnosticsUnderlinedHint',        'Hint',        '', 'underline')
 
 " Tree-sitter
-call s:h('TSAnnotation',         s:red,           '', '')
-call s:h('TSAttribute',          s:bright_yellow, '', '')
-call s:h('TSBoolean',            s:yellow,        '', '')
-call s:h('TSCharacter',          s:green,         '', '')
-call s:h('TSComment',            s:fg_grey,       '', 'italic')
-call s:h('TSConditional',        s:purple,        '', '')
-call s:h('TSConstBuiltin',       s:bright_yellow, '', '')
-call s:h('TSConstMacro',         s:cyan,          '', '')
-call s:h('TSConstant',           s:green,         '', '')
-call s:h('TSConstructor',        s:reset,         '', '')
-call s:h('TSEmphasis',           s:reset,         '', 'bold')
-call s:h('TSError',              s:red,           '', '')
-call s:h('TSException',          s:purple,        '', '')
-call s:h('TSField',              s:reset,         '', '')
-call s:h('TSFloat',              s:yellow,        '', '')
-call s:h('TSFuncBuiltin',        s:cyan,          '', '')
-call s:h('TSFuncMacro',          s:purple,        '', '')
-call s:h('TSFunction',           s:blue,          '', '')
-call s:h('TSInclude',            s:red,           '', '')
-call s:h('TSKeyword',            s:red,           '', '')
-call s:h('TSKeywordFunction',    s:red,           '', '')
-call s:h('TSLabel',              s:purple,        '', '')
-call s:h('TSMethod',             s:blue,          '', '')
-call s:h('TSNamespace',          s:reset,         '', '')
-call s:h('TSNumber',             s:yellow,        '', '')
-call s:h('TSOperator',           s:blue,          '', '')
-call s:h('TSParameter',          s:reset,         '', '')
-call s:h('TSParameterReference', s:reset,         '', '')
-call s:h('TSProperty',           s:red,           '', '')
-call s:h('TSPunctBracket',       s:reset,         '', '')
-call s:h('TSPunctDelimiter',     s:reset,         '', '')
-call s:h('TSPunctSpecial',       s:bright_yellow, '', '')
-call s:h('TSRepeat',             s:purple,        '', '')
-call s:h('TSString',             s:green,         '', '')
-call s:h('TSStringEscape',       s:blue,          '', '')
-call s:h('TSStringRegex',        s:blue,          '', '')
-call s:h('TSStructure',          s:red,           '', '')
-call s:h('TSTag',                s:red,           '', '')
-call s:h('TSTagDelimiter',       s:purple,        '', '')
-call s:h('TSText',               s:green,         '', '')
-call s:h('TSType',               s:bright_yellow, '', '')
-call s:h('TSTypeBuiltin',        s:bright_yellow, '', '')
+call s:h('TSAnnotation',         'Keyword',       '', '')
+call s:h('TSAttribute',          'Macro',         '', '')
+call s:h('TSBoolean',            'Literal',       '', '')
+call s:h('TSCharacter',          'String',        '', '')
+call s:h('TSComment',            'Quiet',         '', s:italic)
+call s:h('TSConditional',        'Statement',     '', '')
+call s:h('TSConstBuiltin',       'Constant',      '', '')
+call s:h('TSConstMacro',         'Macro',         '', '')
+call s:h('TSConstant',           'Constant',      '', '')
+call s:h('TSConstructor',        'NormalFg',      '', '')
+call s:h('TSEmphasis',           '',              '', 'bold')
+call s:h('TSError',              'Error',         '', '')
+call s:h('TSException',          'Statement',     '', '')
+call s:h('TSField',              'NormalFg',      '', '')
+call s:h('TSFloat',              'Literal',       '', '')
+call s:h('TSFuncBuiltin',        'Macro',         '', '')
+call s:h('TSFuncMacro',          'Macro',         '', '')
+call s:h('TSFunction',           'Function',      '', '')
+call s:h('TSInclude',            'Macro',         '', '')
+call s:h('TSKeyword',            'Keyword',       '', '')
+call s:h('TSKeywordFunction',    'Keyword',       '', '')
+call s:h('TSLabel',              'Statement',     '', '')
+call s:h('TSMethod',             'Function',      '', '')
+call s:h('TSNamespace',          'NormalFg',      '', '')
+call s:h('TSNumber',             'Literal',       '', '')
+call s:h('TSOperator',           'Operator',      '', '')
+call s:h('TSParameter',          'NormalFg',      '', '')
+call s:h('TSParameterReference', 'NormalFg',      '', '')
+call s:h('TSProperty',           'NormalFg',      '', '')
+call s:h('TSPunctBracket',       'NormalFg',      '', '')
+call s:h('TSPunctDelimiter',     'NormalFg',      '', '')
+call s:h('TSPunctSpecial',       'NormalFg',      '', '')
+call s:h('TSRepeat',             'Statement',     '', '')
+call s:h('TSString',             'String',        '', '')
+call s:h('TSStringEscape',       'Escape',        '', '')
+call s:h('TSStringRegex',        'Escape',        '', '')
+call s:h('TSStructure',          'Keyword',       '', '')
+call s:h('TSTag',                'Keyword',       '', '')
+call s:h('TSTagDelimiter',       'NormalFg',      '', '')
+call s:h('TSText',               'String',        '', '')
+call s:h('TSType',               'Type',          '', '')
+call s:h('TSTypeBuiltin',        'Type',          '', '')
 call s:h('TSUnderline',          '',              '', 'underline')
-call s:h('TSURI',                s:blue,          '', 'underline')
-call s:h('TSVariable',           s:reset,         '', '')
-call s:h('TSVariableBuiltin',    s:green,         '', '')
+call s:h('TSURI',                'Emphasis',      '', 'underline')
+call s:h('TSVariable',           'Variable',      '', '')
+call s:h('TSVariableBuiltin',    'Constant',      '', '')
