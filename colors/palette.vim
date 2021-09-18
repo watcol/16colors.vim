@@ -57,214 +57,206 @@ let s:default_config = {
 \   'Directory': 'cyan',
 \   'Header': 'brown',
 \   'Marker': 'purple',
-\ }
+\ },
+\ 'highlights': {
+  \ 'Normal': {'fg': 'NormalFg', 'bg': 'NormalBg'},
+  \ 'ColorColumn': {'bg': 'Background'},
+  \ 'Conceal': {'fg': 'Quiet'},
+  \ 'Cursor': {'bg': 'Background'},
+  \ 'CursorIM': {'bg': 'Background'},
+  \ 'CursorColumn': {'bg': 'Cursor'},
+  \ 'CursorLine': {'bg': 'Cursor', 'attrs': ['none']},
+  \ 'LineNr': {'fg': 'Quiet', 'bg': 'NormalBg'},
+  \ 'CursorLineNr': {'fg': 'NormalFg', 'bg': 'Cursor'},
+  \ 'VertSplit': {'fg': 'Cursor', 'bg': 'Cursor'},
+  \ 'Folded': {'fg': 'Quiet', 'bg': 'NormalBg', 'attrs': ['italic']},
+  \ 'FoldColumn': {'fg': 'Quiet', 'bg': 'Background'},
+  \ 'Search': {'fg': 'Search', 'bg': 'Background', 'attrs': ['none']},
+  \ 'IncSearch': {'fg': 'Search', 'bg': 'Background', 'attrs': ['none']},
+  \ 'MatchParen': {'fg': 'Emphasis', 'bg': 'NormalBg', 'attrs': ['underline']},
+  \ 'ErrorMsg': {'fg': 'Error', 'bg': 'NormalBg', 'attrs': ['none']},
+  \ 'WarningMsg': {'fg': 'Warning', 'bg': 'NormalBg', 'attrs': ['none']},
+  \ 'Question': {'fg': 'Information'},
+  \ 'Title': {'fg': 'Header'},
+  \ 'MoreMsg': {'fg': 'Information'},
+  \ 'NonText': {'fg': 'VeryQuiet'},
+  \ 'SpecialKey': {'fg': 'VeryQuiet', 'attrs': ['none']},
+  \ 'Whitespace': {'fg': 'VeryQuiet', 'attrs': ['none']},
+  \ 'Visual': {'bg': 'Background', 'attrs': ['none']},
+  \ 'VisualNOS': {'bg': 'Background', 'attrs': ['none']},
+  \ 'WildMenu': {'bg': 'Background', 'attrs': ['none']},
+  \ 'SignColumn': {'bg': 'NormalBg', 'attrs': ['none']},
+  \ 'Directory': {'fg': 'Directory', 'attrs': ['none']},
+  \ 'Pmenu': {'fg': 'NormalFg', 'bg': 'Background', 'attrs': ['none']},
+  \ 'PmenuSel': {'fg': 'NormalFg', 'bg': 'Selected', 'attrs': ['none']},
+  \ 'PmenuSbar': {'bg': 'Background', 'attrs': ['none']},
+  \ 'PmenuThumb': {'bg': 'NormalBg', 'attrs': ['reverse']},
+  \ 'StatusLine': {'fg': 'NormalFg', 'attrs': ['none']},
+  \ 'StatusLineNC': {'fg': 'Quiet', 'attrs': ['none']},
+  \ 'TabLine': {'fg': 'Quiet', 'attrs': ['none']},
+  \ 'TabLineSel': {'fg': 'Quiet', 'bg': 'Background', 'attrs': ['none']},
+  \ 'TabLineFill': {'fg': 'NormalFg', 'attrs': ['none']},
+  \ 'Comment': {'fg': 'Quiet', 'attrs': ['italic']},
+  \ 'Constant': {'fg': 'Constant'},
+  \ 'String': {'fg': 'String'},
+  \ 'Character': {'fg': 'String'},
+  \ 'Number': {'fg': 'Literal'},
+  \ 'Boolean': {'fg': 'Literal'},
+  \ 'Float': {'fg': 'Literal'},
+  \ 'Identifier': {'fg': 'Variable'},
+  \ 'Function': {'fg': 'Function'},
+  \ 'Statement': {'fg': 'Statement'},
+  \ 'Operator': {'fg': 'Operator'},
+  \ 'Keyword': {'fg': 'Keyword'},
+  \ 'Preproc': {'fg': 'Macro'},
+  \ 'Type': {'fg': 'Type'},
+  \ 'Delimiter': {'fg': 'NormalFg'},
+  \ 'Underlined': {'fg': 'Emphasis', 'attrs': ['underline']},
+  \ 'Error': {'fg': 'Error', 'bg': 'NormalBg', 'attrs': ['bold']},
+  \ 'Todo': {'fg': 'Marker', 'bg': 'NormalBg'},
+  \ 'SpellBad': {'fg': 'Error', 'bg': 'NormalBg', 'attrs': ['underline']},
+  \ 'SpellLocal': {'fg': 'Warning', 'bg': 'NormalBg', 'attrs': ['underline']},
+  \ 'SpellCap': {'fg': 'Warning', 'bg': 'NormalBg', 'attrs': ['underline']},
+  \ 'SpellRare': {'fg': 'Warning', 'bg': 'NormalBg', 'attrs': ['underline']},
+  \ 'DiffAdd': {'fg': 'Add', 'bg': 'NormalBg'},
+  \ 'DiffChange': {'fg': 'Change', 'bg': 'NormalBg'},
+  \ 'DiffDelete': {'fg': 'Delete', 'bg': 'NormalBg'},
+  \ 'DiffText': {'fg': 'Information',},
+  \ 'DiffAdded': {'fg': 'Add'},
+  \ 'DiffFile': {'fg': 'Emphasis'},
+  \ 'DiffNewFile': {'fg': 'Add'},
+  \ 'DiffLine': {'fg': 'Information'},
+  \ 'DiffRemoved': {'fg': 'Delete'},
+  \ 'gitcommitBranch': {'fg': 'Marker'},
+  \ 'gitcommitHeader': {'fg': 'Header'},
+  \ 'gitcommitSummary': {'fg': 'NormalFg'},
+  \ 'gitcommitOverflow': {'fg': 'Emphasis'},
+  \ 'gitcommitUntrackedFile': {'fg': 'Warning'},
+  \ 'gitcommitDiscardedFile': {'fg': 'Emphasis'},
+  \ 'gitcommitSelectedFile': {'fg': 'Information'},
+  \ 'gitcommitUnmergedFile': {'fg': 'Warning'},
+  \ 'SignifySignAdd': {'fg': 'Add'},
+  \ 'SignifySignChange': {'fg': 'Change'},
+  \ 'SignifySignDelete': {'fg': 'Delete'},
+  \ 'GitGutterAdd': {'fg': 'Add'},
+  \ 'GitGutterChange': {'fg': 'Change'},
+  \ 'GitGutterDelete': {'fg': 'Delete'},
+  \ 'GitSignsAdd': {'fg': 'Add'},
+  \ 'GitSignsChange': {'fg': 'Change'},
+  \ 'GitSignsDelete': {'fg': 'Delete'},
+  \ 'ALEError': {'fg': 'Error', 'attrs': ['underline']},
+  \ 'ALEWarning': {'fg': 'Warning', 'attrs': ['underline']},
+  \ 'ALEInfo': {'fg': 'Information', 'attrs': ['underline']},
+  \ 'LspError': {'fg': 'Error', 'attrs': ['']},
+  \ 'LspErrorText': {'fg': 'Error', 'attrs': ['']},
+  \ 'LspErrorHighlight': {'fg': 'Error', 'attrs': ['underline']},
+  \ 'LspErrorVirtualText': {'fg': 'Error', 'bg': 'Background'},
+  \ 'LspWarning': {'fg': 'Warning'},
+  \ 'LspWarningText': {'fg': 'Warning'},
+  \ 'LspWarningHighlight': {'fg': 'Warning', 'attrs': ['underline']},
+  \ 'LspWarningVirtualText': {'fg': 'Warning', 'bg': 'Background'},
+  \ 'LspInformation': {'fg': 'Information'},
+  \ 'LspInformationText': {'fg': 'Information'},
+  \ 'LspInformationHighlight': {'fg': 'Information', 'attrs': ['underline']},
+  \ 'LspInformationVirtualText': {'fg': 'Information', 'bg': 'Background'},
+  \ 'LspHint': {'fg': 'Hint'},
+  \ 'LspHintText': {'fg': 'Hint'},
+  \ 'LspHintHighlight': {'fg': 'Hint', 'attrs': ['underline']},
+  \ 'LspHintVirtualText': {'fg': 'Hint', 'bg': 'Background'},
+  \ 'LspCodeActionText': {'fg': 'Marker'},
+  \ 'LspDiagnosticsDefaultError': {'fg': 'Error'},
+  \ 'LspDiagnosticsDefaultWarning': {'fg': 'Warning'},
+  \ 'LspDiagnosticsDefaultInformation': {'fg': 'Information'},
+  \ 'LspDiagnosticsDefaultHint': {'fg': 'Hint'},
+  \ 'LspDiagnosticsUnderlinedError': {'fg': 'Error', 'attrs': ['underline']},
+  \ 'LspDiagnosticsUnderlinedWarning': {'fg': 'Warning', 'attrs': ['underline']},
+  \ 'LspDiagnosticsUnderlinedInformation': {'fg': 'Information', 'attrs': ['underline']},
+  \ 'LspDiagnosticsUnderlinedHint': {'fg': 'Hint', 'attrs': ['underline']},
+  \ 'TSAnnotation': {'fg': 'Keyword'},
+  \ 'TSAttribute': {'fg': 'Macro'},
+  \ 'TSBoolean': {'fg': 'Literal'},
+  \ 'TSCharacter': {'fg': 'String'},
+  \ 'TSComment': {'fg': 'Quiet', 'attrs': ['italic']},
+  \ 'TSConditional': {'fg': 'Statement'},
+  \ 'TSConstBuiltin': {'fg': 'Constant'},
+  \ 'TSConstMacro': {'fg': 'Macro',},
+  \ 'TSConstant': {'fg': 'Constant'},
+  \ 'TSConstructor': {'fg': 'NormalFg'},
+  \ 'TSEmphasis': {'attrs': ['bold']},
+  \ 'TSError': {'fg': 'Error'},
+  \ 'TSException': {'fg': 'Statement'},
+  \ 'TSField': {'fg': 'NormalFg'},
+  \ 'TSFloat': {'fg': 'Literal'},
+  \ 'TSFuncBuiltin': {'fg': 'Macro'},
+  \ 'TSFuncMacro': {'fg': 'Macro'},
+  \ 'TSFunction': {'fg': 'Function'},
+  \ 'TSInclude': {'fg': 'Macro'},
+  \ 'TSKeyword': {'fg': 'Keyword'},
+  \ 'TSKeywordFunction': {'fg': 'Keyword'},
+  \ 'TSLabel': {'fg': 'Statement'},
+  \ 'TSMethod': {'fg': 'Function'},
+  \ 'TSNamespace': {'fg': 'NormalFg'},
+  \ 'TSNumber': {'fg': 'Literal'},
+  \ 'TSOperator': {'fg': 'Operator'},
+  \ 'TSParameter': {'fg': 'NormalFg'},
+  \ 'TSParameterReference': {'fg': 'NormalFg'},
+  \ 'TSProperty': {'fg': 'NormalFg'},
+  \ 'TSPunctBracket': {'fg': 'NormalFg'},
+  \ 'TSPunctDelimiter': {'fg': 'NormalFg'},
+  \ 'TSPunctSpecial': {'fg': 'NormalFg'},
+  \ 'TSRepeat': {'fg': 'Statement'},
+  \ 'TSString': {'fg': 'String'},
+  \ 'TSStringEscape': {'fg': 'Escape'},
+  \ 'TSStringRegex': {'fg': 'Escape'},
+  \ 'TSStructure': {'fg': 'Keyword'},
+  \ 'TSTag': {'fg': 'Keyword'},
+  \ 'TSTagDelimiter': {'fg': 'NormalFg'},
+  \ 'TSText': {'fg': 'String'},
+  \ 'TSType': {'fg': 'Type'},
+  \ 'TSTypeBuiltin': {'fg': 'Type'},
+  \ 'TSUnderline': {'attrs': ['underline']},
+  \ 'TSURI': {'fg': 'Emphasis', 'attrs': ['underline']},
+  \ 'TSVariable': {'fg': 'Variable'},
+  \ 'TSVariableBuiltin': {'fg': 'Constant'},
+\ },
 \}
 
-" TODO: Load g:palette
-let s:config = s:default_config
-let s:italic = s:config.italic ? 'italic' : ''
+function! s:merge(default, override) abort
+  let l:new = copy(a:default)
+  for [l:k, l:v] in items(a:override)
+    if type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict
+      let l:new[l:k] = s:merge(l:new[l:k], l:v)
+    else
+      let l:new[l:k] = l:v
+    endif
+  endfor
+  return l:new
+endfunction
 
-" Utility function
-function! s:h(group, fg, bg, attr)
+function! s:h(group, props)
   let l:cmd = "hi " . a:group
-  if !empty(a:fg)
-    let l:fg = s:config.colors[s:config.categories[a:fg]]
+  let l:fg = get(a:props, 'fg', '')
+  let l:bg = get(a:props, 'bg', '')
+  let l:attr = join(map(get(a:props, 'attrs', []), { -> v:val is# 'italic' ? s:italic : v:val }), ',')
+  if !empty(l:fg)
+    let l:fg = s:config.colors[s:config.categories[l:fg]]
     let l:cmd = l:cmd . ' ctermfg=' . l:fg.cterm . ' guifg=' . l:fg.gui
   endif
-  if !empty(a:bg)
-    let l:bg = s:config.colors[s:config.categories[a:bg]]
+  if !empty(l:bg)
+    let l:bg = s:config.colors[s:config.categories[l:bg]]
     let l:cmd = l:cmd . ' ctermbg=' . l:bg.cterm . ' guibg=' . l:bg.gui
   endif
-  if !empty(a:attr)
-    let l:cmd = l:cmd . ' cterm=' . a:attr . ' gui=' . a:attr
+  if !empty(l:attr)
+    let l:cmd = l:cmd . ' cterm=' . l:attr . ' gui=' . l:attr
   endif
-  if !empty(a:fg) || !empty(a:bg) || !empty(a:attr)
+  if !empty(l:fg) || !empty(l:bg) || !empty(l:attr)
     execute l:cmd
   end
 endfunction
 
-" Editor colors
-call s:h('Normal',       'NormalFg',    'NormalBg',   '')
-call s:h('ColorColumn',  '',            'Background', '')
-call s:h('Conceal',      'Quiet',       '',           '')
-call s:h('Cursor',       '',            'Background', '')
-call s:h('CursorIM',     '',            'Background', '')
-call s:h('CursorColumn', '',            'Cursor',     '')
-call s:h('CursorLine',   '',            'Cursor',     'none')
-call s:h('LineNr',       'Quiet',       'NormalBg',   '')
-call s:h('CursorLineNr', 'NormalFg',    'Cursor',     '')
-call s:h('VertSplit',    'Cursor',      'Cursor',     '')
-call s:h('Folded',       'Quiet',       'NormalBg',   s:italic)
-call s:h('FoldColumn',   'Quiet',       'Background', '')
-call s:h('Search',       'Search',      'Background', 'none')
-call s:h('IncSearch',    'Search',      'Background', 'none')
-call s:h('MatchParen',   'Emphasis',    'NormalBg',   'underline')
-call s:h('ModeMsg',      '',            '',           '')
-call s:h('ErrorMsg',     'Error',       'NormalBg',   'none')
-call s:h('WarningMsg',   'Warning',     'NormalBg',   'none')
-call s:h('Question',     'Information', '',           '')
-call s:h('Title',        'Header',      '',           '')
-call s:h('MoreMsg',      'Information', '',           '')
-call s:h('NonText',      'VeryQuiet',   '',           '')
-call s:h('SpecialKey',   'VeryQuiet',   '',           'none')
-call s:h('Whitespace',   'VeryQuiet',   '',           'none')
-call s:h('Visual',       '',            'Background', 'none')
-call s:h('VisualNOS',    '',            'Background', 'none')
-call s:h('WildMenu',     '',            'Background', 'none')
-call s:h('SignColumn',   '',            'NormalBg',   'none')
-call s:h('Directory',    'Directory',   '',           'none')
+let s:config = s:merge(s:default_config, get(g:, 'palette', {}))
+let s:italic = s:config.italic ? 'italic' : ''
 
-" Popup Menu
-call s:h('Pmenu',      'NormalFg', 'Background', 'none')
-call s:h('PmenuSel',   'NormalFg', 'Selected',   'none')
-call s:h('PmenuSbar',  '',         'Background', 'none')
-call s:h('PmenuThumb', '',         'NormalBg',   'reverse')
-
-" Status Line
-call s:h('StatusLine',   'NormalFg', '',           'none')
-call s:h('StatusLineNC', 'Quiet',    '',           'none')
-call s:h('TabLine',      'Quiet',    '',           'none')
-call s:h('TabLineSel',   'Quiet',    'Background', 'none')
-call s:h('TabLineFill',  'NormalFg', '',           'none')
-
-" Standard Syntax
-call s:h('Comment',    'Quiet',     '',         s:italic)
-call s:h('Constant',   'Constant',  '',         '')
-call s:h('String',     'String',    '',         '')
-call s:h('Character',  'String',    '',         '')
-call s:h('Number',     'Literal',   '',         '')
-call s:h('Boolean',    'Literal',   '',         '')
-call s:h('Float',      'Literal',   '',         '')
-call s:h('Identifier', 'Variable',  '',         'none')
-call s:h('Function',   'Function',  '',         '')
-call s:h('Statement',  'Statement', '',         '')
-call s:h('Operator',   'Operator',  '',         '')
-call s:h('Keyword',    'Keyword',   '',         '')
-call s:h('Preproc',    'Macro',     '',         '')
-call s:h('Type',       'Type',      '',         'none')
-call s:h('Special',    '',          '',         '')
-call s:h('Delimiter',  'NormalFg',  '',         '')
-call s:h('Underlined', 'Emphasis',  '',         'underline')
-call s:h('Ignore',     '',          '',         '')
-call s:h('Error',      'Error',     'NormalBg', 'bold')
-call s:h('Todo',       'Marker',    'NormalBg', '')
-
-" Spell Check
-call s:h('SpellBad',   'Error',   'NormalBg', 'underline')
-call s:h('SpellLocal', 'Warning', 'NormalBg', 'underline')
-call s:h('SpellCap',   'Warning', 'NormalBg', 'underline')
-call s:h('SpellRare',  'Warning', 'NormalBg', 'underline')
-
-" Diff highlight
-call s:h('DiffAdd',     'Add',          'NormalBg', '')
-call s:h('DiffChange',  'Change',       'NormalBg', 'none')
-call s:h('DiffDelete',  'Delete',       'NormalBg', '')
-call s:h('DiffText',    'Information',  '',         '')
-call s:h('DiffAdded',   'Add',          '',         '')
-call s:h('DiffFile',    'Emphasis',     '',         '')
-call s:h('DiffNewFile', 'Add',          '',         '')
-call s:h('DiffLine',    'Information',  '',         '')
-call s:h('DiffRemoved', 'Delete',       '',         '')
-
-" Gitcommit highlights
-call s:h('gitcommitBranch',        'Marker',      '', '')
-call s:h('gitcommitHeader',        'Header',      '', '')
-call s:h('gitcommitSummary',       'NormalFg',    '', '')
-call s:h('gitcommitOverflow',      'Emphasis',    '', '')
-call s:h('gitcommitUntrackedFile', 'Warning',     '', '')
-call s:h('gitcommitDiscardedFile', 'Emphasis',    '', '')
-call s:h('gitcommitSelectedFile',  'Information', '', '')
-call s:h('gitcommitUnmergedFile',  'Warning',     '', '')
-
-" signify, gitgutter, gitsigns
-call s:h('SignifySignAdd',    'Add',    '', '')
-call s:h('SignifySignChange', 'Change', '', '')
-call s:h('SignifySignDelete', 'Delete', '', '')
-hi link GitGutterAdd    SignifySignAdd
-hi link GitGutterChange SignifySignChange
-hi link GitGutterDelete SignifySignDelete
-hi link GitSignsAdd    SignifySignAdd
-hi link GitSignsChange SignifySignChange
-hi link GitSignsDelete SignifySignDelete
-
-" ALE
-call s:h('ALEError',   'Error',       '', 'underline')
-call s:h('ALEWarning', 'Warning',     '', 'underline')
-call s:h('ALEInfo',    'Information', '', 'underline')
-
-" vim-lsp
-call s:h('LspError',                  'Error',       '',           '')
-call s:h('LspErrorText',              'Error',       '',           '')
-call s:h('LspErrorHighlight',         'Error',       '',           'underline')
-call s:h('LspErrorVirtualText',       'Error',       'Background', '')
-call s:h('LspWarning',                'Warning',     '',           'none')
-call s:h('LspWarningText',            'Warning',     '',           'none')
-call s:h('LspWarningHighlight',       'Warning',     '',           'underline')
-call s:h('LspWarningVirtualText',     'Warning',     'Background', '')
-call s:h('LspInformation',            'Information', '',           '')
-call s:h('LspInformationText',        'Information', '',           '')
-call s:h('LspInformationHighlight',   'Information', '',           'underline')
-call s:h('LspInformationVirtualText', 'Information', 'Background', '')
-call s:h('LspHint',                   'Hint',        '',           '')
-call s:h('LspHintText',               'Hint',        '',           '')
-call s:h('LspHintHighlight',          'Hint',        '',           'underline')
-call s:h('LspHintVirtualText',        'Hint',        'Background', '')
-call s:h('LspCodeActionText',         'Marker',      '',           '')
-
-" Neovim built-in LSP
-call s:h('LspDiagnosticsDefaultError',          'Error',       '', '')
-call s:h('LspDiagnosticsDefaultWarning',        'Warning',     '', '')
-call s:h('LspDiagnosticsDefaultInformation',    'Information', '', '')
-call s:h('LspDiagnosticsDefaultHint',           'Hint',        '', '')
-call s:h('LspDiagnosticsUnderlinedError',       'Error',       '', 'underline')
-call s:h('LspDiagnosticsUnderlinedWarning',     'Warning',     '', 'underline')
-call s:h('LspDiagnosticsUnderlinedInformation', 'Information', '', 'underline')
-call s:h('LspDiagnosticsUnderlinedHint',        'Hint',        '', 'underline')
-
-" Tree-sitter
-call s:h('TSAnnotation',         'Keyword',   '', '')
-call s:h('TSAttribute',          'Macro',     '', '')
-call s:h('TSBoolean',            'Literal',   '', '')
-call s:h('TSCharacter',          'String',    '', '')
-call s:h('TSComment',            'Quiet',     '', s:italic)
-call s:h('TSConditional',        'Statement', '', '')
-call s:h('TSConstBuiltin',       'Constant',  '', '')
-call s:h('TSConstMacro',         'Macro',     '', '')
-call s:h('TSConstant',           'Constant',  '', '')
-call s:h('TSConstructor',        'NormalFg',  '', '')
-call s:h('TSEmphasis',           '',          '', 'bold')
-call s:h('TSError',              'Error',     '', '')
-call s:h('TSException',          'Statement', '', '')
-call s:h('TSField',              'NormalFg',  '', '')
-call s:h('TSFloat',              'Literal',   '', '')
-call s:h('TSFuncBuiltin',        'Macro',     '', '')
-call s:h('TSFuncMacro',          'Macro',     '', '')
-call s:h('TSFunction',           'Function',  '', '')
-call s:h('TSInclude',            'Macro',     '', '')
-call s:h('TSKeyword',            'Keyword',   '', '')
-call s:h('TSKeywordFunction',    'Keyword',   '', '')
-call s:h('TSLabel',              'Statement', '', '')
-call s:h('TSMethod',             'Function',  '', '')
-call s:h('TSNamespace',          'NormalFg',  '', '')
-call s:h('TSNumber',             'Literal',   '', '')
-call s:h('TSOperator',           'Operator',  '', '')
-call s:h('TSParameter',          'NormalFg',  '', '')
-call s:h('TSParameterReference', 'NormalFg',  '', '')
-call s:h('TSProperty',           'NormalFg',  '', '')
-call s:h('TSPunctBracket',       'NormalFg',  '', '')
-call s:h('TSPunctDelimiter',     'NormalFg',  '', '')
-call s:h('TSPunctSpecial',       'NormalFg',  '', '')
-call s:h('TSRepeat',             'Statement', '', '')
-call s:h('TSString',             'String',    '', '')
-call s:h('TSStringEscape',       'Escape',    '', '')
-call s:h('TSStringRegex',        'Escape',    '', '')
-call s:h('TSStructure',          'Keyword',   '', '')
-call s:h('TSTag',                'Keyword',   '', '')
-call s:h('TSTagDelimiter',       'NormalFg',  '', '')
-call s:h('TSText',               'String',    '', '')
-call s:h('TSType',               'Type',      '', '')
-call s:h('TSTypeBuiltin',        'Type',      '', '')
-call s:h('TSUnderline',          '',          '', 'underline')
-call s:h('TSURI',                'Emphasis',  '', 'underline')
-call s:h('TSVariable',           'Variable',  '', '')
-call s:h('TSVariableBuiltin',    'Constant',  '', '')
+for [group, hl] in items(s:config.highlights)
+  call s:h(group, hl)
+endfor
