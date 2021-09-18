@@ -1,18 +1,33 @@
-" Name: 16colors.vim
+" Name: palette.vim
 " Author: watcol
 " License: MIT
-
-if has('gui_running') || &termguicolors
-  echoerr '16colors does not support GUI'
-endif
 
 " Setup
 hi clear
 syntax reset
-let g:colors_name = '16colors'
+let g:colors_name = 'palette'
 
 " Load Configurations
-let s:light = get(g:, '16colors_background', &backgorund) is# 'light'
+let s:light = &background is# 'light'
+let s:default_config = {
+\ 'italic': 1,
+\ 'colors': {
+\   'fg': {'cterm': '', 'gui': s:light ? '#000000' : '#ffffff'},
+\   'bg': {'cterm': '', 'gui': s:light ? '#ffffff' : '#000000'},
+\   'fg_gray': {'cterm': s:light ? '7' : '8', 'gui': s:light ? '#555555' : '#aaaaaa'},
+\   'bg_gray': {'cterm': s:light ? '15' : '0', 'gui': s:light ? '#aaaaaa' : '#555555'},
+\   'cursor_gray': {'cterm': s:light ? '15' : '0', 'gui': s:light ? '#dddddd' : '#222222'},
+\   'red': {'cterm': '1', 'gui': '#aa0000'},
+\   'green': {'cterm': '2', 'gui': '#00aa00'},
+\   'brown': {'cterm': '3', 'gui': '#aa5500'},
+\   'blue': {'cterm': '4', 'gui': '#0000aa'},
+\   'purple': {'cterm': '5', 'gui': '#aa00aa'},
+\   'cyan': {'cterm': '6', 'gui': '#00aaaa'},
+\   'yellow': {'cterm': '11', 'gui': '#ffff55'},
+\ }
+\}
+
+" TODO: Load g:palette
 
 " Colors
 let s:reset = 'none'
@@ -95,7 +110,7 @@ call s:h('Directory',    s:cyan,    '',             'none')
 call s:h('Pmenu',      s:reset, s:bg_grey, 'none')
 call s:h('PmenuSel',   s:reset, s:fg_grey, 'none')
 call s:h('PmenuSbar',  '',      s:bg_grey, 'none')
-call s:h('PmenuThumb', '',      s:fg,      'none')
+call s:h('PmenuThumb', '',      s:reset,   'reverse')
 
 " Status Line
 call s:h('StatusLine',   s:reset,   '',        'none')

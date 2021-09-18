@@ -1,5 +1,5 @@
-# [WIP] 16colors.vim
-A configurable Vim/Neovim color scheme for 16-color terminals.
+# [WIP] palette.vim
+A colorscheme creation framework for Vim8/Neovim.
 
 # Supported Plugins
 - [ ] [itchyny/lightline.vim](https://github.com/itchyny/lightline.vim)
@@ -16,21 +16,21 @@ A configurable Vim/Neovim color scheme for 16-color terminals.
 
 ## With [vim-plug](https://github.com/junegunn/vim-plug)
 ```vim
-Plug 'watcol/16colors.vim'
+Plug 'watcol/palette.vim'
 ```
 
 ## With [dein.vim](https://github.com/Shougo/dein.vim)
 ```vim
-call dein#add('watcol/16colors.vim')
+call dein#add('watcol/palette.vim')
 ```
 
 ## With [minpac](https://github.com/k-takata/minpac)
 ```vim
-call minpac#add('watcol/16colors.vim')
+call minpac#add('watcol/palette.vim')
 ```
 
 # Usage
 Put this instruction into your vimrc to enable the colorscheme:
 ```vim
-colorscheme 16colors
+colorscheme palette
 ```
